@@ -2,8 +2,11 @@ package com.notoriousdev.irmc.irc;
 
 import com.notoriousdev.irmc.IRMC;
 import java.io.IOException;
+import java.nio.channels.Channels;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
 
@@ -29,5 +32,8 @@ public class Bot {
         }
         bot.joinChannel("#thereverend403");
         bot.getChannel("#thereverend403").sendMessage("Connection was a success!");
+    }
+    public void endHere() {
+        for (Channel channel : bot.getChannels()) { bot.partChannel(channel); }
     }
 }

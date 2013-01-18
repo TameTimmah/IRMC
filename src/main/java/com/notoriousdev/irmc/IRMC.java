@@ -9,7 +9,7 @@ public class IRMC extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // TODO: We need this shit, yo!
+        bot.endHere();
     }
 
     @Override
