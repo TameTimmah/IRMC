@@ -5,3 +5,4 @@ IRMC (Internet Relay Minecraft Chat, or Internet Relay MineCraft - I just wanted
 Changelog
 =======
 * Lets commit some stuff and update the README - BranicYeti
+* And hope nothing breaks - TheReverend403
