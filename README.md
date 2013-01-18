@@ -6,3 +6,4 @@ Changelog
 =======
 * Lets commit some stuff and update the README - BranicYeti
 * And hope nothing breaks - TheReverend403
+* Well, it connects... That's a start... Shame it stays connected on unload... My bad... - BranicYeti
