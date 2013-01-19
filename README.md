@@ -9,3 +9,4 @@ Changelog
 * Well, it connects... That's a start... Shame it stays connected on unload... My bad... - BranicYeti
 * Now disconnects on unload - TheReverend403
 * Transferred ownership to NotoriousDev github. Today, a new group has been reborn! - BranicYeti
+* Added default config options and logged a little more info to the console - TheReverend403
