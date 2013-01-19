@@ -1,3 +1,16 @@
+# The name of the plugin. We can use this for stuff.
 name: IRMC
+# This is obvious... Probably don't touch it...
 main: com.notoriousdev.irmc.IRMC
-version: 1.0
+# Make sure this is updated when we update the plugin.
+version: 1.0-SNAPSHOT
+# The website for NotoriousDev. Not likely to change any time soon.
+website: http://www.notoriousdev.com
+# Blah blah blah...
+description: An IRC-Minecraft bridge that allows 2-way commands and permissions.
+# Don't just add yourself here. An existing author must add you if they feel you deserve it.
+authors: [BranicYeti, TheReverend403]
+# In-Game commands
+commands:
+  irmc:
+    description: Base command for IRMC.
