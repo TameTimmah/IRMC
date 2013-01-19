@@ -18,6 +18,7 @@ public class IRMC extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         getLogger().info("IRMC bot is connecting...");
+        bot = new Bot(this);
         bot.connect();
         getLogger().info("IRMC Successfully enabled");
     }
