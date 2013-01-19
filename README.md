@@ -10,3 +10,4 @@ Changelog
 * Now disconnects on unload - TheReverend403
 * Transferred ownership to NotoriousDev github. Today, a new group has been reborn! - BranicYeti
 * Added default config options and logged a little more info to the console - TheReverend403
+* Fixed Rev's attempt at config stuff. THERE'S AN EASIER WAY, DUDE! - BranicYeti
