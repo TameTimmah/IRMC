@@ -7,7 +7,7 @@ version: 1.0-SNAPSHOT
 # The website for NotoriousDev. Not likely to change any time soon.
 website: http://www.notoriousdev.com
 # Blah blah blah...
-description: An IRC-Minecraft bridge that allows 2-way commands and permissions.
+description: An IRC-Minecraft bridge that allows 2-way commands, chat and permissions.
 # Don't just add yourself here. An existing author must add you if they feel you deserve it.
 authors: [BranicYeti, TheReverend403]
 # In-Game commands

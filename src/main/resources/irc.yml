@@ -2,3 +2,37 @@
 #         IRMC        #
 #  Bot Configuration  #
 #######################
+settings:
+    enable-verbose: true
+    enable-auto-nickchange: true
+    enable-auto-server-reconnect: true
+    enable-auto-channel-reconnect: true
+    enable-auto-split-messages: true
+server:
+    address: 'irc.esper.net'
+bot:
+    nickname: 'TestBot'
+    ident: 'IRMCBot'
+    password: 'password'
+ctcp:
+    version: '' # wat?
+    finger: '' # I ain't fingering no bot.
+channels:
+    - '#thereverend403'
+    - '#BranicYeti'
+command-trigger: []
+permissions:
+    user:
+        - permission
+    voice:
+        - permission
+    halfop:
+        - permission
+    op:
+        - permission
+    superop:
+        - permission
+    owner:
+        - permission
+accesslist: []
+

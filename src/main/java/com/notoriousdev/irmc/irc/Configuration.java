@@ -38,30 +38,30 @@ public class Configuration {
     private static List<String> accesslist;
 
     public static void loadConfig() {
-        enable_verbose = IRMC.ircConfig.getConfig().getBoolean("Settings.Enable-Verbose");
-        enable_auto_nickchange = IRMC.ircConfig.getConfig().getBoolean("SettingsEnable-Auto-Nickchange");
-        enable_auto_reconnect_server = IRMC.ircConfig.getConfig().getBoolean("Settings.Enable-Auto-Server-Reconnect");
-        enable_auto_reconnect_channels = IRMC.ircConfig.getConfig().getBoolean("Settings.Enable-Auto-Channel-Reconnect");
-        enable_auto_split_messages = IRMC.ircConfig.getConfig().getBoolean("Settings.Enable-Auto-Split-Messages");
-        server_address = IRMC.ircConfig.getConfig().getString("Server.Address");
-        server_port = IRMC.ircConfig.getConfig().getInt("Server.Port");
-        server_password = IRMC.ircConfig.getConfig().getString("Server.Password");
-        server_use_ssl = IRMC.ircConfig.getConfig().getBoolean("Server.Use-SSL");
-        server_verify_ssl = IRMC.ircConfig.getConfig().getBoolean("Server.Verify-SSL");
-        bot_nickname = IRMC.ircConfig.getConfig().getString("Bot.Nickname");
-        bot_ident = IRMC.ircConfig.getConfig().getString("Bot.Ident");
-        bot_password = IRMC.ircConfig.getConfig().getString("Bot.Password");
-        ctcp_version = IRMC.ircConfig.getConfig().getString("CTCP.Version");
-        ctcp_finger = IRMC.ircConfig.getConfig().getString("CTCP.Finger");
-        channels_list = IRMC.ircConfig.getConfig().getStringList("Channels");
-        command_trigger = IRMC.ircConfig.getConfig().getString("Command-Trigger");
-        user_permissions = IRMC.ircConfig.getConfig().getStringList("Permissions.User");
-        voice_permissions = IRMC.ircConfig.getConfig().getStringList("Permissions.Voice");
-        halfop_permissions = IRMC.ircConfig.getConfig().getStringList("Permissions.Half-Op");
-        op_permissions = IRMC.ircConfig.getConfig().getStringList("Permissions.Op");
-        superop_permissions = IRMC.ircConfig.getConfig().getStringList("Permissions.Super-Op");
-        owner_permissions = IRMC.ircConfig.getConfig().getStringList("Permissions.Owner");
-        accesslist = IRMC.ircConfig.getConfig().getStringList("AccessList");
+        enable_verbose = IRMC.ircConfig.getConfig().getBoolean("settings.enable-verbose");
+        enable_auto_nickchange = IRMC.ircConfig.getConfig().getBoolean("settings.enable-auto-nickchange");
+        enable_auto_reconnect_server = IRMC.ircConfig.getConfig().getBoolean("settings.enable-auto-aerver-reconnect");
+        enable_auto_reconnect_channels = IRMC.ircConfig.getConfig().getBoolean("settings.enable-auto-channel-reconnect");
+        enable_auto_split_messages = IRMC.ircConfig.getConfig().getBoolean("settings.enable-auto-split-messages");
+        server_address = IRMC.ircConfig.getConfig().getString("server.address");
+        server_port = IRMC.ircConfig.getConfig().getInt("server.port");
+        server_password = IRMC.ircConfig.getConfig().getString("server.password");
+        server_use_ssl = IRMC.ircConfig.getConfig().getBoolean("server.use-ssl");
+        server_verify_ssl = IRMC.ircConfig.getConfig().getBoolean("server.verify-ssl");
+        bot_nickname = IRMC.ircConfig.getConfig().getString("bot.nickname");
+        bot_ident = IRMC.ircConfig.getConfig().getString("bot.ident");
+        bot_password = IRMC.ircConfig.getConfig().getString("bot.password");
+        ctcp_version = IRMC.ircConfig.getConfig().getString("ctcp.version");
+        ctcp_finger = IRMC.ircConfig.getConfig().getString("ctcp.finger");
+        channels_list = IRMC.ircConfig.getConfig().getStringList("channels");
+        command_trigger = IRMC.ircConfig.getConfig().getString("command-trigger");
+        user_permissions = IRMC.ircConfig.getConfig().getStringList("permissions.user");
+        voice_permissions = IRMC.ircConfig.getConfig().getStringList("permissions.voice");
+        halfop_permissions = IRMC.ircConfig.getConfig().getStringList("permissions.halfop");
+        op_permissions = IRMC.ircConfig.getConfig().getStringList("permissions.op");
+        superop_permissions = IRMC.ircConfig.getConfig().getStringList("permissions.superop");
+        owner_permissions = IRMC.ircConfig.getConfig().getStringList("permissions.owner");
+        accesslist = IRMC.ircConfig.getConfig().getStringList("accessList");
     }
 
     public static boolean verboseEnabled() {
