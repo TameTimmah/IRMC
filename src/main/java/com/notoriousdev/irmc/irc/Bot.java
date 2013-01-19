@@ -35,5 +35,6 @@ public class Bot {
     }
     public void endHere() {
         for (Channel channel : bot.getChannels()) { bot.partChannel(channel); }
+        bot.disconnect();
     }
 }
