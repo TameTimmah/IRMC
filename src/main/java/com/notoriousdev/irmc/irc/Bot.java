@@ -30,8 +30,8 @@ public class Bot {
         } catch (IrcException ex) {
             Logger.getLogger(Bot.class.getName()).log(Level.SEVERE, null, ex);
         }
-        bot.joinChannel("#thereverend403");
-        bot.getChannel("#thereverend403").sendMessage("Connection was a success!");
+        bot.joinChannel("#BranicYeti");
+        bot.getChannel("#branicyeti").sendMessage("Connection was a success!");
     }
     public void endHere() {
         for (Channel channel : bot.getChannels()) { bot.partChannel(channel); }
