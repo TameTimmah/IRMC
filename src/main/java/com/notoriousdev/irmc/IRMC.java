@@ -14,6 +14,9 @@ public class IRMC extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getConfig().addDefault("account.use-nickserv", "true");
+        getConfig().addDefault("account.name", "IRMC");
+        getConfig().addDefault("account.nickserv-pass", "IRMC");
         bot = new Bot(this);
         bot.startHere();
     }
