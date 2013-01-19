@@ -2,3 +2,9 @@
 #          IRMC          #
 #  Plugin Configuration  #
 ##########################
+
+account:
+    #the name the bot will use
+    nick: 'Professor`Oak'
+    #the channel the bot will join on startup.
+    channel: '#branicyeti'
