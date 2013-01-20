@@ -16,11 +16,6 @@ public class Bot {
 
     public final PircBotX bot;
     public final IRMC plugin;
-    public static IrcConfig ircConfig;
-    public static Configuration config;
-    String nick;
-    String server;
-    private static List<String> channels;
 
     public Bot(IRMC plugin){
         this.plugin = plugin;
@@ -28,25 +23,35 @@ public class Bot {
 
     }
     public void connect(){
-      channels = Configuration.getChannelList();
-      server = Configuration.getServerAddress();
-      nick = Configuration.getBotNickname();
-      try {
-          bot.connect(server);
-      }  catch (IOException ex) {
-          Logger.getLogger(Bot.class.getName()).log(Level.SEVERE, null, ex);
-      }  catch (IrcException ex) {
-          Logger.getLogger(Bot.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      Configuration.loadConfig();
+      bot.setName(Configuration.getBotNickname());
+      connectToServer();
       for (String s : channels){
-      bot.setName(nick);
       bot.joinChannel(s);
       bot.getChannel(s).sendMessage("Connection success!");
       }
     }
+    
+    public static void connectToServer() {
+        String server = Configuration.getServerAddress();
+        int port = Configuration.getServerPort();
+        String password = Configuration.getServerPassword();
+        try {
+            if (Configuration.useServerSSL() && Configuration.verifyServerSSL()) {
+                bot.connect(server, port, password, new UtilSSLSocketFactory());
+            } else if (Configuration.useServerSSL() && !Configuration.verifyServerSSL()) {
+                bot.connect(server, port, password, new UtilSSLSocketFactory().trustAllCertificates());
+            } else {
+                bot.connect(server, port);
+            }
+        } catch (Exception e) {
+        }
+    }
 
     public  void disconnect(){
-        for (Channel channel : bot.getChannels()) { bot.partChannel(channel); }
+        for (Channel channel : bot.getChannels()) {
+            bot.partChannel(channel);
+        }
         bot.disconnect();
     }
 
