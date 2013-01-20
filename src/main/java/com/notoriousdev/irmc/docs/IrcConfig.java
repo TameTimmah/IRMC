@@ -50,7 +50,7 @@ public class IrcConfig {
     }
 
     public void saveDefaultConfig() {
-        if (!configFile.exists()) {
+        if (!new File(plugin.getDataFolder(), fileName).exists()) {
             this.plugin.saveResource(fileName, false);
         }
     }
