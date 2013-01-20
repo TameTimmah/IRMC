@@ -3,7 +3,8 @@ package com.notoriousdev.irmc.irc;
 import com.notoriousdev.irmc.IRMC;
 import java.util.List;
 
-public class Configuration {
+public class Configuration
+{
 
     private boolean enable_verbose;
     private boolean enable_auto_nickchange;
@@ -38,7 +39,8 @@ public class Configuration {
     //
     private List<String> accesslist;
 
-    public void loadConfig() {
+    public void loadConfig()
+    {
         enable_verbose = IRMC.ircConfig.getConfig().getBoolean("settings.enable-verbose");
         enable_auto_nickchange = IRMC.ircConfig.getConfig().getBoolean("settings.enable-auto-nickchange");
         enable_auto_reconnect_server = IRMC.ircConfig.getConfig().getBoolean("settings.enable-auto-aerver-reconnect");
@@ -66,103 +68,128 @@ public class Configuration {
         accesslist = IRMC.ircConfig.getConfig().getStringList("accessList");
     }
 
-    public boolean verboseEnabled() {
+    public boolean verboseEnabled()
+    {
         return enable_verbose;
     }
 
-    public boolean autoNickchangeEnabled() {
+    public boolean autoNickchangeEnabled()
+    {
         return enable_auto_nickchange;
     }
 
-    public boolean autoReconnectServerEnabled() {
+    public boolean autoReconnectServerEnabled()
+    {
         return enable_auto_reconnect_server;
     }
 
-    public boolean autoReconnectChannelsEnabled() {
+    public boolean autoReconnectChannelsEnabled()
+    {
         return enable_auto_reconnect_channels;
     }
 
-    public boolean autoSplitMessagesEnabled() {
+    public boolean autoSplitMessagesEnabled()
+    {
         return enable_auto_split_messages;
     }
 
-    public String getServerAddress() {
+    public String getServerAddress()
+    {
         return server_address;
     }
 
-    public int getServerPort() {
+    public int getServerPort()
+    {
         return server_port;
     }
 
-    public String getServerPassword() {
+    public String getServerPassword()
+    {
         return server_password;
     }
 
-    public boolean useServerSSL() {
+    public boolean useServerSSL()
+    {
         return server_use_ssl;
     }
 
-    public boolean verifyServerSSL() {
+    public boolean verifyServerSSL()
+    {
         return server_verify_ssl;
     }
 
-    public String getBotNickname() {
+    public String getBotNickname()
+    {
         return bot_nickname;
     }
 
-    public String getBotIdent() {
+    public String getBotIdent()
+    {
         return bot_ident;
     }
 
-    public String getBotPassword() {
+    public String getBotPassword()
+    {
         return bot_password;
     }
 
-    public boolean useNickserv() {
+    public boolean useNickserv()
+    {
         return bot_use_nickserv;
     }
 
-    public String respondCTCPVersion() {
+    public String respondCTCPVersion()
+    {
         return ctcp_version;
     }
 
-    public String respondCTCPFinger() {
+    public String respondCTCPFinger()
+    {
         return ctcp_finger;
     }
 
-    public List<String> getChannelList() {
+    public List<String> getChannelList()
+    {
         return channels_list;
     }
 
-    public String getCommandTrigger() {
+    public String getCommandTrigger()
+    {
         return command_trigger;
     }
 
-    public List<String> getUserPermissions() {
+    public List<String> getUserPermissions()
+    {
         return user_permissions;
     }
 
-    public List<String> getVoicePermissions() {
+    public List<String> getVoicePermissions()
+    {
         return voice_permissions;
     }
 
-    public List<String> getHalfopPermissions() {
+    public List<String> getHalfopPermissions()
+    {
         return halfop_permissions;
     }
 
-    public List<String> getOpPermissions() {
+    public List<String> getOpPermissions()
+    {
         return op_permissions;
     }
 
-    public List<String> getSuperopPermissions() {
+    public List<String> getSuperopPermissions()
+    {
         return superop_permissions;
     }
 
-    public List<String> getOwnerPermissions() {
+    public List<String> getOwnerPermissions()
+    {
         return owner_permissions;
     }
 
-    public List<String> getAccessList() {
+    public List<String> getAccessList()
+    {
         return accesslist;
     }
 }
