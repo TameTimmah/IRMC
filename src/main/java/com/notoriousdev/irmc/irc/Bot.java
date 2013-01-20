@@ -2,8 +2,12 @@ package com.notoriousdev.irmc.irc;
 
 import com.notoriousdev.irmc.IRMC;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.notoriousdev.irmc.docs.IrcConfig;
+import com.sun.org.apache.xerces.internal.xs.StringList;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.exception.IrcException;
@@ -12,8 +16,6 @@ public class Bot {
 
     public final PircBotX bot;
     public final IRMC plugin;
-    String nick;
-    String channel;
 
     public Bot(IRMC plugin){
         this.plugin = plugin;
@@ -21,22 +23,34 @@ public class Bot {
 
     }
     public void connect(){
-      nick = plugin.getConfig().getString("account.nick");
-      channel = plugin.getConfig().getString("account.channel");
-      bot.setName(nick);
-      try {
-          bot.connect("irc.esper.net");
-      }  catch (IOException ex) {
-          Logger.getLogger(Bot.class.getName()).log(Level.SEVERE, null, ex);
-      }  catch (IrcException ex) {
-          Logger.getLogger(Bot.class.getName()).log(Level.SEVERE, null, ex);
+      bot.setName(Configuration.getBotNickname());
+      connectToServer();
+      for (String s : channels){
+      bot.joinChannel(s);
+      bot.getChannel(s).sendMessage("Connection success!");
       }
-      bot.joinChannel(channel);
-      bot.getChannel(channel).sendMessage("Connection success!");
+    }
+    
+    public static void connectToServer() {
+        String server = Configuration.getServerAddress();
+        int port = Configuration.getServerPort();
+        String password = Configuration.getServerPassword();
+        try {
+            if (Configuration.useServerSSL() && Configuration.verifyServerSSL()) {
+                bot.connect(server, port, password, new UtilSSLSocketFactory());
+            } else if (Configuration.useServerSSL() && !Configuration.verifyServerSSL()) {
+                bot.connect(server, port, password, new UtilSSLSocketFactory().trustAllCertificates());
+            } else {
+                bot.connect(server, port);
+            }
+        } catch (Exception e) {
+        }
     }
 
     public  void disconnect(){
-        for (Channel channel : bot.getChannels()) { bot.partChannel(channel); }
+        for (Channel channel : bot.getChannels()) {
+            bot.partChannel(channel);
+        }
         bot.disconnect();
     }
 
