@@ -12,3 +12,4 @@ Changelog
 * Added default config options and logged a little more info to the console - TheReverend403
 * Fixed Rev's attempt at config stuff. THERE'S AN EASIER WAY, DUDE! - BranicYeti
 * Added Configuration for PircBotX. - BranicYeti
+* Added defaults to irc.yml and made use of the channel list - TheReverend403
