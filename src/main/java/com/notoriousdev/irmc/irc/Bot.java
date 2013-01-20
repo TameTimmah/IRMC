@@ -19,7 +19,7 @@ public class Bot {
 
     }
     public void connect(){
-      bot.setVerbose(true);
+      bot.setVerbose(true);  //Debug line
       config.loadConfig();
       bot.setName(config.getBotNickname());
       connectToServer();

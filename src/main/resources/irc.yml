@@ -11,6 +11,8 @@ settings:
 server:
   address: 'irc.esper.net'
   port: 6667
+  use-ssl: false    # errors when it's set to true. Fix, ples. http://pastebin.com/2E8iPLiQ
+  verify-ssl: false
 bot:
   nickname: 'TestBot'
   ident: 'IRMCBot'
