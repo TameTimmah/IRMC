@@ -10,6 +10,7 @@ settings:
   enable-auto-split-messages: true
 server:
   address: 'irc.esper.net'
+  port: 6667
 bot:
   nickname: 'TestBot'
   ident: 'IRMCBot'
