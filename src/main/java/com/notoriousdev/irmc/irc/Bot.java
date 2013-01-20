@@ -1,18 +1,14 @@
 package com.notoriousdev.irmc.irc;
 
 import com.notoriousdev.irmc.IRMC;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.notoriousdev.irmc.docs.IrcConfig;
-import com.sun.org.apache.xerces.internal.xs.StringList;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
-import org.pircbotx.exception.IrcException;
+import org.pircbotx.UtilSSLSocketFactory;
 
 public class Bot {
+
+    Configuration config = new Configuration();
 
     public final PircBotX bot;
     public final IRMC plugin;
@@ -23,23 +19,25 @@ public class Bot {
 
     }
     public void connect(){
-      Configuration.loadConfig();
-      bot.setName(Configuration.getBotNickname());
+      bot.setVerbose(true);
+      config.loadConfig();
+      bot.setName(config.getBotNickname());
       connectToServer();
+      List<String> channels = config.getChannelList();
       for (String s : channels){
       bot.joinChannel(s);
       bot.getChannel(s).sendMessage("Connection success!");
       }
     }
     
-    public static void connectToServer() {
-        String server = Configuration.getServerAddress();
-        int port = Configuration.getServerPort();
-        String password = Configuration.getServerPassword();
+    public void connectToServer() {
+        String server = config.getServerAddress();
+        int port = config.getServerPort();
+        String password = config.getServerPassword();
         try {
-            if (Configuration.useServerSSL() && Configuration.verifyServerSSL()) {
+            if (config.useServerSSL() && config.verifyServerSSL()) {
                 bot.connect(server, port, password, new UtilSSLSocketFactory());
-            } else if (Configuration.useServerSSL() && !Configuration.verifyServerSSL()) {
+            } else if (config.useServerSSL() && !config.verifyServerSSL()) {
                 bot.connect(server, port, password, new UtilSSLSocketFactory().trustAllCertificates());
             } else {
                 bot.connect(server, port);

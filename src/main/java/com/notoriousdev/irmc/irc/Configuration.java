@@ -5,39 +5,39 @@ import java.util.List;
 
 public class Configuration {
 
-    private static boolean enable_verbose;
-    private static boolean enable_auto_nickchange;
-    private static boolean enable_auto_reconnect_server;
-    private static boolean enable_auto_reconnect_channels;
-    private static boolean enable_auto_split_messages;
+    private boolean enable_verbose;
+    private boolean enable_auto_nickchange;
+    private boolean enable_auto_reconnect_server;
+    private boolean enable_auto_reconnect_channels;
+    private boolean enable_auto_split_messages;
     //
-    private static String server_address;
-    private static int server_port;
-    private static String server_password;
-    private static boolean server_use_ssl;
-    private static boolean server_verify_ssl;
+    private String server_address;
+    private int server_port;
+    private String server_password;
+    private boolean server_use_ssl;
+    private boolean server_verify_ssl;
     //
-    private static String bot_nickname;
-    private static String bot_ident;
-    private static String bot_password;
+    private String bot_nickname;
+    private String bot_ident;
+    private String bot_password;
     //
-    private static String ctcp_version;
-    private static String ctcp_finger;
+    private String ctcp_version;
+    private String ctcp_finger;
     //
-    private static List<String> channels_list;
+    private List<String> channels_list;
     //
-    private static String command_trigger;
+    private String command_trigger;
     //
-    private static List<String> user_permissions;
-    private static List<String> voice_permissions;
-    private static List<String> halfop_permissions;
-    private static List<String> op_permissions;
-    private static List<String> superop_permissions;
-    private static List<String> owner_permissions;
+    private List<String> user_permissions;
+    private List<String> voice_permissions;
+    private List<String> halfop_permissions;
+    private List<String> op_permissions;
+    private List<String> superop_permissions;
+    private List<String> owner_permissions;
     //
-    private static List<String> accesslist;
+    private List<String> accesslist;
 
-    public static void loadConfig() {
+    public void loadConfig() {
         enable_verbose = IRMC.ircConfig.getConfig().getBoolean("settings.enable-verbose");
         enable_auto_nickchange = IRMC.ircConfig.getConfig().getBoolean("settings.enable-auto-nickchange");
         enable_auto_reconnect_server = IRMC.ircConfig.getConfig().getBoolean("settings.enable-auto-aerver-reconnect");
@@ -64,99 +64,99 @@ public class Configuration {
         accesslist = IRMC.ircConfig.getConfig().getStringList("accessList");
     }
 
-    public static boolean verboseEnabled() {
+    public boolean verboseEnabled() {
         return enable_verbose;
     }
 
-    public static boolean autoNickchangeEnabled() {
+    public boolean autoNickchangeEnabled() {
         return enable_auto_nickchange;
     }
 
-    public static boolean autoReconnectServerEnabled() {
+    public boolean autoReconnectServerEnabled() {
         return enable_auto_reconnect_server;
     }
 
-    public static boolean autoReconnectChannelsEnabled() {
+    public boolean autoReconnectChannelsEnabled() {
         return enable_auto_reconnect_channels;
     }
 
-    public static boolean autoSplitMessagesEnabled() {
+    public boolean autoSplitMessagesEnabled() {
         return enable_auto_split_messages;
     }
 
-    public static String getServerAddress() {
+    public String getServerAddress() {
         return server_address;
     }
 
-    public static int getServerPort() {
+    public int getServerPort() {
         return server_port;
     }
 
-    public static String getServerPassword() {
+    public String getServerPassword() {
         return server_password;
     }
 
-    public static boolean useServerSSL() {
+    public boolean useServerSSL() {
         return server_use_ssl;
     }
 
-    public static boolean verifyServerSSL() {
+    public boolean verifyServerSSL() {
         return server_verify_ssl;
     }
 
-    public static String getBotNickname() {
+    public String getBotNickname() {
         return bot_nickname;
     }
 
-    public static String getBotIdent() {
+    public String getBotIdent() {
         return bot_ident;
     }
 
-    public static String getBotPassword() {
+    public String getBotPassword() {
         return bot_password;
     }
 
-    public static String respondCTCPVersion() {
+    public String respondCTCPVersion() {
         return ctcp_version;
     }
 
-    public static String respondCTCPFinger() {
+    public String respondCTCPFinger() {
         return ctcp_finger;
     }
 
-    public static List<String> getChannelList() {
+    public List<String> getChannelList() {
         return channels_list;
     }
 
-    public static String getCommandTrigger() {
+    public String getCommandTrigger() {
         return command_trigger;
     }
 
-    public static List<String> getUserPermissions() {
+    public List<String> getUserPermissions() {
         return user_permissions;
     }
 
-    public static List<String> getVoicePermissions() {
+    public List<String> getVoicePermissions() {
         return voice_permissions;
     }
 
-    public static List<String> getHalfopPermissions() {
+    public List<String> getHalfopPermissions() {
         return halfop_permissions;
     }
 
-    public static List<String> getOpPermissions() {
+    public List<String> getOpPermissions() {
         return op_permissions;
     }
 
-    public static List<String> getSuperopPermissions() {
+    public List<String> getSuperopPermissions() {
         return superop_permissions;
     }
 
-    public static List<String> getOwnerPermissions() {
+    public List<String> getOwnerPermissions() {
         return owner_permissions;
     }
 
-    public static List<String> getAccessList() {
+    public List<String> getAccessList() {
         return accesslist;
     }
 }
