@@ -28,10 +28,9 @@ public class Bot {
 
     }
     public void connect(){
-      nick = ircConfig.getConfig().getString("bot.nickname");
-      channels = ircConfig.getConfig().getStringList("channels");
-      server = ircConfig.getConfig().getString("server.address");
-      bot.setName(nick);
+      channels = Configuration.getChannelList();
+      server = Configuration.getServerAddress();
+      nick = Configuration.getBotNickname();
       try {
           bot.connect(server);
       }  catch (IOException ex) {
@@ -40,6 +39,7 @@ public class Bot {
           Logger.getLogger(Bot.class.getName()).log(Level.SEVERE, null, ex);
       }
       for (String s : channels){
+      bot.setName(nick);
       bot.joinChannel(s);
       bot.getChannel(s).sendMessage("Connection success!");
       }
