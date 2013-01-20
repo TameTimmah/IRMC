@@ -23,7 +23,7 @@ public class Bot {
 
     }
     public void connect(){
-      Configuration.loadOptions();
+      Configuration.loadConfig();
       bot.setName(Configuration.getBotNickname());
       connectToServer();
       for (String s : channels){
