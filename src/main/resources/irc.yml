@@ -16,6 +16,7 @@ server:
 bot:
   nickname: 'TestBot'
   ident: 'IRMCBot'
+  use-nickserv: false
   password: 'password'
 ctcp:
   version: '' # wat?

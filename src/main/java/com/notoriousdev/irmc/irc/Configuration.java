@@ -19,6 +19,7 @@ public class Configuration {
     //
     private String bot_nickname;
     private String bot_ident;
+    private Boolean bot_use_nickserv;
     private String bot_password;
     //
     private String ctcp_version;
@@ -51,6 +52,7 @@ public class Configuration {
         bot_nickname = IRMC.ircConfig.getConfig().getString("bot.nickname");
         bot_ident = IRMC.ircConfig.getConfig().getString("bot.ident");
         bot_password = IRMC.ircConfig.getConfig().getString("bot.password");
+        bot_use_nickserv = IRMC.ircConfig.getConfig().getBoolean("bot.use-nickserv");
         ctcp_version = IRMC.ircConfig.getConfig().getString("ctcp.version");
         ctcp_finger = IRMC.ircConfig.getConfig().getString("ctcp.finger");
         channels_list = IRMC.ircConfig.getConfig().getStringList("channels");
@@ -114,6 +116,10 @@ public class Configuration {
 
     public String getBotPassword() {
         return bot_password;
+    }
+
+    public boolean useNickserv() {
+        return bot_use_nickserv;
     }
 
     public String respondCTCPVersion() {
