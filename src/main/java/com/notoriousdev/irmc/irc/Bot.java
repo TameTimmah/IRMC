@@ -47,10 +47,12 @@ public class Bot {
     }
 
     public  void disconnect(){
-        for (Channel channel : bot.getChannels()) {
-            bot.partChannel(channel);
+        if(bot.isConnected()){
+            for (Channel channel : bot.getChannels()) {
+                bot.partChannel(channel);
+            }
+            bot.disconnect();
         }
-        bot.disconnect();
     }
 
 }
