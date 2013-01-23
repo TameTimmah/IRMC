@@ -2,8 +2,8 @@ package com.notoriousdev.irmc;
 
 
 import com.notoriousdev.irmc.docs.IrcConfig;
-import org.bukkit.plugin.java.JavaPlugin;
 import com.notoriousdev.irmc.irc.Bot;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class IRMC extends JavaPlugin {
 

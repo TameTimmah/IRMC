@@ -1,11 +1,12 @@
 package com.notoriousdev.irmc.docs;
 
 import com.notoriousdev.irmc.IRMC;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 
 public class IrcConfig {
 

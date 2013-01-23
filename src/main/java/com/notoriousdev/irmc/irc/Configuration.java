@@ -1,6 +1,7 @@
 package com.notoriousdev.irmc.irc;
 
 import com.notoriousdev.irmc.IRMC;
+
 import java.util.List;
 
 public class Configuration {
