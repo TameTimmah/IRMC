@@ -9,7 +9,7 @@ website: http://www.notoriousdev.com
 # Blah blah blah...
 description: An IRC-Minecraft bridge that allows 2-way commands, chat and permissions.
 # Don't just add yourself here. An existing author must add you if they feel you deserve it.
-authors: [BranicYeti, TheReverend403]
+authors: [BranicYeti, TheReverend403, GunfighterJ]
 # In-Game commands
 commands:
   irmc:
