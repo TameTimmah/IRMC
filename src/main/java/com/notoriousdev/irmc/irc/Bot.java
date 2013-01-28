@@ -22,7 +22,11 @@ public class Bot
 
     public void connect()
     {
-        bot.setVerbose(true);  //Debug line
+        if(config.verboseEnabled()){
+            bot.setVerbose(true);
+        }else{
+            bot.setVerbose(false);
+        }
         config.loadConfig();
         bot.setName(config.getBotNickname());
         connectToServer();

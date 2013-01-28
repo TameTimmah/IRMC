@@ -3,7 +3,7 @@
 #  Bot Configuration  #
 #######################
 settings:
-  enable-verbose: true
+  enable-verbose: false  #Enable for debugging
   enable-auto-nickchange: true
   enable-auto-server-reconnect: true
   enable-auto-channel-reconnect: true
@@ -14,7 +14,7 @@ server:
   use-ssl: false    # errors when it's set to true. Fix, ples. http://pastebin.com/2E8iPLiQ
   verify-ssl: false
 bot:
-  nickname: 'TestBot'
+  nickname: 'IRMCBot'
   ident: 'IRMCBot'
   use-nickserv: false
   password: 'password'
@@ -22,8 +22,7 @@ ctcp:
   version: '' # wat?
   finger: '' # I ain't fingering no bot.
 channels:
-  - '#thereverend403'
-  - '#BranicYeti'
+  - '#IRMC'
 command-trigger: []
 permissions:
   user:
