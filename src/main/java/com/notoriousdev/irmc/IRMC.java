@@ -1,32 +1,35 @@
 package com.notoriousdev.irmc;
 
-import com.notoriousdev.irmc.docs.IrcConfig;
-import com.notoriousdev.irmc.irc.Bot;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class IRMC extends JavaPlugin
 {
 
     private Bot bot;
-    public static IrcConfig ircConfig;
+    //private final int tid;
 
     @Override
     public void onDisable()
     {
-        getLogger().info("IRMC bot is disconnecting...");
-        bot.disconnect();
-        getLogger().info("IRMC Successfully disabled");
+        bot.kill();
+        bot = null;
     }
 
     @Override
     public void onEnable()
     {
-        ircConfig = new IrcConfig(this);
         saveDefaultConfig();
-        ircConfig.saveDefaultConfig();
-        getLogger().info("IRMC bot is connecting...");
-        bot = new Bot(this);
-        bot.connect();
-        getLogger().info("IRMC Successfully enabled");
+        System.out.println("[IRMC] Initialising Bot...");
+        getServer().getScheduler().runTaskAsynchronously(this, bot);
+        registerEvents();
+        registerCommands();
+    }
+
+    private void registerEvents()
+    {
+    }
+
+    private void registerCommands()
+    {
     }
 }
