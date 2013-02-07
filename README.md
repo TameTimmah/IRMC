@@ -14,3 +14,4 @@ Changelog
 * Added Configuration for PircBotX. - BranicYeti
 * Added defaults to irc.yml and made use of the channel list - TheReverend403
 * Added option to toggle nickserv usage - TheReverend403
+* Plenty of success today. Let's keep it up - BranicYeti
