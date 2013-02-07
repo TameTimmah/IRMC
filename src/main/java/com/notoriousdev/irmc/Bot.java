@@ -1,11 +1,12 @@
 package com.notoriousdev.irmc;
 
+import java.io.IOException;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.UtilSSLSocketFactory;
+import org.pircbotx.exception.IrcException;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
-import lombok.Getter;
 
 public class Bot extends ListenerAdapter implements Runnable
 {
@@ -13,43 +14,54 @@ public class Bot extends ListenerAdapter implements Runnable
     private final IRMC plugin;
     private final Thread thread;
     private PircBotX bot;
-    private Config conf;
-
+    private Conf conf;
+    private boolean debug;
+    private boolean verbose;
     
 
-    public Bot(IRMC plugin, Config conf)
+    public Bot(IRMC plugin, Conf conf)
     {
         this.plugin = plugin;
         this.conf = conf;
+        conf.loadConfig();
         thread = new Thread(this);
         thread.start();
     }
-    
-    private boolean debug = conf.isDebug();
-    private boolean verbose = conf.isVerbose();
 
     @Override
     public synchronized void run()
     {
+        
         if (debug) {
             plugin.getLogger().info(String.format("Initialising IRMC..."));
-        }
-        bot = new PircBotX();
+        }       
         if (debug) {
             plugin.getLogger().info(String.format("Loading configuration..."));
         }
-        loadConfig();
         if (debug) {
             plugin.getLogger().info(String.format("Connecting to server..."));
         }
-        connect();
-        addListeners();
+        
+        try {
+            this.start();
+        } catch (final Exception e) {
+        }
     }
 
+    void start()
+    {
+        bot = new PircBotX();
+        loadConfig();
+        addListeners();
+        connect();
+    }
+    
     private void loadConfig()
     {
+        this.debug = true;
+        this.verbose = true;
         bot.setVerbose(debug && verbose);
-        bot.setAutoNickChange(true);
+        bot.setAutoNickChange(conf.isAutoNick());
         plugin.getLogger().warning(String.format("Configuration not fully implemented!"));
     }
 
@@ -61,10 +73,17 @@ public class Bot extends ListenerAdapter implements Runnable
             } else if (conf.isSsl() && !conf.isVerifySsl()) {
                 bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass(), new UtilSSLSocketFactory().trustAllCertificates());
             } else {
-                bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass());
+                if(conf.getServerPass().isEmpty())
+                {
+                    bot.connect(conf.getServer(), conf.getPort());
+                }
+                else
+                {
+                    bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass());
+                }
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (final IOException e) {
+        } catch (final IrcException e) {
         }
     }
 
@@ -111,6 +130,14 @@ public class Bot extends ListenerAdapter implements Runnable
             thread.join();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+    
+    public void sendChannels(String msg) //TODO: this doesn't work
+    {
+        for(Channel chan : bot.getChannels())
+        {
+            chan.sendMessage(msg);
         }
     }
 }

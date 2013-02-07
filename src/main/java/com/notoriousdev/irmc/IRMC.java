@@ -1,16 +1,14 @@
 package com.notoriousdev.irmc;
 
+import com.notoriousdev.irmc.events.bukkit.PlayerListener;
 import java.io.File;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class IRMC extends JavaPlugin
 {
 
     private Bot bot;
-    Config config;
+    Conf conf;
 
     @Override
     public void onDisable()
@@ -30,14 +28,20 @@ public class IRMC extends JavaPlugin
             saveDefaultConfig();
             return;
         }
-        config = new Config(this);
-        bot = new Bot(this, config);
+        conf = new Conf(this);
+        conf.loadConfig();
+        bot = new Bot(this, conf);
         
-        //getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
     }
     
-    public Config getConf()
+    public Conf getConf()
     {
-        return config;
+        return conf;
+    }
+    
+    public Bot getBot()
+    {
+        return bot;
     }
 }
