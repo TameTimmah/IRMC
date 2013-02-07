@@ -14,3 +14,5 @@ authors: [BranicYeti, TheReverend403, GunfighterJ]
 commands:
   irmc:
     description: Base command for IRMC.
+  joinchan:
+   description: Temp command
