@@ -5,6 +5,7 @@ import org.pircbotx.PircBotX;
 import org.pircbotx.UtilSSLSocketFactory;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
+import lombok.Getter;
 
 public class Bot extends ListenerAdapter implements Runnable
 {
@@ -12,20 +13,24 @@ public class Bot extends ListenerAdapter implements Runnable
     private final IRMC plugin;
     private final Thread thread;
     private PircBotX bot;
-    //
-    private boolean debug = false;
+    private Config conf;
 
-    public Bot(IRMC plugin)
+    
+
+    public Bot(IRMC plugin, Config conf)
     {
         this.plugin = plugin;
+        this.conf = conf;
         thread = new Thread(this);
         thread.start();
     }
+    
+    private boolean debug = conf.isDebug();
+    private boolean verbose = conf.isVerbose();
 
     @Override
     public synchronized void run()
     {
-        debug = plugin.getConfig().getBoolean("irc.debug");
         if (debug) {
             plugin.getLogger().info(String.format("Initialising IRMC..."));
         }
@@ -43,7 +48,7 @@ public class Bot extends ListenerAdapter implements Runnable
 
     private void loadConfig()
     {
-        bot.setVerbose(debug && plugin.getConfig().getBoolean("irc.verbose"));
+        bot.setVerbose(debug && verbose);
         bot.setAutoNickChange(true);
         plugin.getLogger().warning(String.format("Configuration not fully implemented!"));
     }
@@ -51,12 +56,12 @@ public class Bot extends ListenerAdapter implements Runnable
     private void connect()
     {
         try {
-            if (plugin.getConfig().getBoolean("irc.use-ssl") && plugin.getConfig().getBoolean("irc.verify-ssl")) {
-                bot.connect(plugin.getConfig().getString("irc.server.address"), plugin.getConfig().getInt("irc.server.port"), plugin.getConfig().getString("irc.server.password"), new UtilSSLSocketFactory());
-            } else if (plugin.getConfig().getBoolean("irc.use-ssl") && !plugin.getConfig().getBoolean("irc.verify-ssl")) {
-                bot.connect(plugin.getConfig().getString("irc.server.address"), plugin.getConfig().getInt("irc.server.port"), plugin.getConfig().getString("irc.server.password"), new UtilSSLSocketFactory().trustAllCertificates());
+            if (conf.isSsl() && conf.isVerifySsl()) {
+                bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass(), new UtilSSLSocketFactory());
+            } else if (conf.isSsl() && !conf.isVerifySsl()) {
+                bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass(), new UtilSSLSocketFactory().trustAllCertificates());
             } else {
-                bot.connect(plugin.getConfig().getString("irc.server.address"), plugin.getConfig().getInt("irc.server.port"), plugin.getConfig().getString("irc.server.password"));
+                bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass());
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -68,7 +73,7 @@ public class Bot extends ListenerAdapter implements Runnable
         if (debug) {
             plugin.getLogger().info(String.format("Joining channels..."));
         }
-        for (String str : plugin.getConfig().getStringList("irc.channels")) {
+        for (String str : conf.getChannels()) {
             if (str.contains(" ")) {
                 if (debug) {
                     plugin.getLogger().info(String.format("Joining %s...", str.split(" ")[0]));

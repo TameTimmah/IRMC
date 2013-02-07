@@ -10,6 +10,7 @@ public class IRMC extends JavaPlugin
 {
 
     private Bot bot;
+    Config config;
 
     @Override
     public void onDisable()
@@ -29,7 +30,14 @@ public class IRMC extends JavaPlugin
             saveDefaultConfig();
             return;
         }
-        bot = new Bot(this);
+        config = new Config(this);
+        bot = new Bot(this, config);
+        
         //getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+    }
+    
+    public Config getConf()
+    {
+        return config;
     }
 }
