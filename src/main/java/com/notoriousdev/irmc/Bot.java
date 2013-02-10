@@ -1,10 +1,7 @@
 package com.notoriousdev.irmc;
 
-import java.io.IOException;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
-import org.pircbotx.UtilSSLSocketFactory;
-import org.pircbotx.exception.IrcException;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.ConnectEvent;
 
@@ -14,12 +11,12 @@ public class Bot extends ListenerAdapter implements Runnable
     private final IRMC plugin;
     private final Thread thread;
     private PircBotX bot;
-    private Conf conf;
+    private Configuration conf;
     private boolean debug;
     private boolean verbose;
     
 
-    public Bot(IRMC plugin, Conf conf)
+    public Bot(IRMC plugin, Configuration conf)
     {
         this.plugin = plugin;
         this.conf = conf;
@@ -53,7 +50,7 @@ public class Bot extends ListenerAdapter implements Runnable
         bot = new PircBotX();
         loadConfig();
         addListeners();
-        connect();
+        //connect();
     }
     
     private void loadConfig()
@@ -65,6 +62,7 @@ public class Bot extends ListenerAdapter implements Runnable
         plugin.getLogger().warning(String.format("Configuration not fully implemented!"));
     }
 
+    /*
     private void connect()
     {
         try {
@@ -86,6 +84,7 @@ public class Bot extends ListenerAdapter implements Runnable
         } catch (final IrcException e) {
         }
     }
+    */
 
     public void joinChannels()
     {

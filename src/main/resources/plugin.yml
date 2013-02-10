@@ -2,7 +2,7 @@
 name: IRMC
 # This is obvious... Probably don't touch it...
 main: com.notoriousdev.irmc.IRMC
-# Make sure this is updated when we update the plugin.
+# Make sure this is updated when we update the plugin along with version in pom.xml
 version: 0.0.1-SNAPSHOT
 # The website for NotoriousDev. Not likely to change any time soon.
 website: http://www.notoriousdev.com
@@ -12,7 +12,5 @@ description: An IRC-Minecraft bridge that allows 2-way commands, chat and permis
 authors: [BranicYeti, TheReverend403, GunfighterJ]
 # In-Game commands
 commands:
-  irmc:
-    description: Base command for IRMC.
-  joinchan:
-   description: Temp command
+# Permissions listed here are parent permissions. The rest we can do in Permissions.java
+permissions:
