@@ -11,6 +11,10 @@
 # Essentials also have an excellent YAML syntax checker here: http://wiki.ess3.net/yaml/
 # The syntax checker will NOT fix your YAML file for you. It will simply tell you what is wrong with your file that you need to fix.
 
+# Some ASCII #
+
+debug: true
+
 ############################################################
 # +------------------------------------------------------+ #
 # |              Minecraft Server Settings               | #
@@ -29,7 +33,6 @@ bukkit:
 
 # These settings are for the configuration of the IRC Bot. These settings shouldn't interfere with the Bukkit server at all.
 irc:
-  debug: true
   verbose: true
   auto-change-nick: true
   auto-rejoin-channel: true
