@@ -2,7 +2,9 @@ package com.notoriousdev.irmc;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,6 +14,7 @@ public class Configuration
 
     private final IRMC plugin;
     private final FileConfiguration config;
+    private Map<String, String> paths = new HashMap<String, String>();
     /* General Config Options */
     @Getter
     @Setter
@@ -64,10 +67,37 @@ public class Configuration
     @Setter
     private String trigger;
 
-    public Configuration(IRMC plugin)
+    public Configuration(IRMC plugin, Bot bot)
     {
         this.plugin = plugin;
         this.config = plugin.getConfig();
+        loadPaths();
+    }
+
+    private void loadPaths()
+    {
+        /* paths.put("/irmc cfg SUBCOMMAND", "path.to.irc.option") */
+        paths.put("debug", "debug");
+        paths.put("verbose", "irc.verbose");
+        paths.put("autonick", "irc.autonick");
+        paths.put("autorejoin", "irc.autorejoin");
+        paths.put("autoreconnect", "irc.autoreconnect");
+        paths.put("autosplit", "irc.autosplit");
+        paths.put("address", "irc.server.address");
+        paths.put("port", "irc.server.port");
+        paths.put("serverpass", "irc.server.password");
+        paths.put("usessl", "irc.server.use-ssl");
+        paths.put("verifyssl", "irc.server.verify-ssl");
+        paths.put("nickname", "irc.identity.nickname");
+        paths.put("ident", "irc.identity.ident");
+        paths.put("password", "irc.identity.password");
+        paths.put("channels", "irc.channels");
+        paths.put("trigger", "irc.trigger");
+    }
+
+    public void loadGeneralConfig()
+    {
+        this.debug = config.getBoolean("irc.debug");
     }
 
     public void loadBukkitConfig()
@@ -100,6 +130,7 @@ public class Configuration
 
     public void loadConfig()
     {
+        loadGeneralConfig();
         loadBukkitConfig();
         loadIrcConfig();
     }
@@ -123,9 +154,18 @@ public class Configuration
         return String.valueOf(port);
     }
 
-    public void setConfig(String path, Object setting)
+    public String getPath(String setting)
     {
-        config.set(path, setting);
+        return paths.get(setting);
+    }
+
+    public void setConfig(String cfg, Object setting)
+    {
+        if (!config.contains(cfg)) {
+            plugin.getLogger().warning("U DUN GOOFED SON!");
+            return;
+        }
+        config.set(getPath(cfg), setting);
         try {
             config.save(new File(plugin.getDataFolder(), "config.yml"));
         } catch (IOException ex) {
