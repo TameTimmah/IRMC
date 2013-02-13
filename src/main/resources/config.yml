@@ -39,15 +39,15 @@ irc:
   auto-reconnect-server: true
   auto-split-message: true
   identity:
-    nickname:
-    ident:
-    password:
-  server:
-    address: irc.esper.net
-    port: 6697
+    nickname: 'IRMCBot'
+    ident: 'irmc'
     password: ''
-    use-ssl: true
-    verify-ssl: true
+  server:
+    address: 'irc.esper.net'
+    port: 6667
+    password: ''
+    use-ssl: false
+    verify-ssl: false
   channels:
   - #channel
   - #channel

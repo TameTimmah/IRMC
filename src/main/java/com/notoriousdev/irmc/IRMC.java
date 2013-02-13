@@ -6,9 +6,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class IRMC extends JavaPlugin
 {
-
+    
     private Bot bot;
-
+    private Configuration conf;
+    
     @Override
     public void onDisable()
     {
@@ -17,7 +18,7 @@ public class IRMC extends JavaPlugin
             bot = null;
         }
     }
-
+    
     @Override
     public void onEnable()
     {
@@ -28,7 +29,14 @@ public class IRMC extends JavaPlugin
             getPluginLoader().disablePlugin(this);
             return;
         }
-        bot = new Bot(this);
-        getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+        conf = new Configuration(this);
+        bot = new Bot(this, conf);
+        getServer().getPluginManager().registerEvents(new PlayerListener(this, bot), this);
+        //getServer().getPluginManager().registerEvents(new ServerListener(this), this);
+    }
+    
+    public void relayToServer(String message)
+    {
+        getServer().broadcastMessage(message);
     }
 }

@@ -67,11 +67,16 @@ public class Configuration
     @Setter
     private String trigger;
 
-    public Configuration(IRMC plugin, Bot bot)
+    public Configuration(IRMC plugin)
     {
         this.plugin = plugin;
         this.config = plugin.getConfig();
-        /* Potentially being moved. Do whatever you want with it. I'm just documenting it. */
+        loadPaths();
+    }
+
+    private void loadPaths()
+    {
+        /* paths.put("/irmc cfg SUBCOMMAND", "path.to.irc.option") */
         paths.put("debug", "debug");
         paths.put("verbose", "irc.verbose");
         paths.put("autonick", "irc.autonick");
