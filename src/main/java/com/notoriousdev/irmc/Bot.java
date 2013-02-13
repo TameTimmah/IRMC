@@ -1,5 +1,7 @@
 package com.notoriousdev.irmc;
 
+import com.notoriousdev.irmc.events.irc.ServerListener;
+import com.notoriousdev.irmc.events.irc.UserListener;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -13,102 +15,55 @@ public class Bot extends ListenerAdapter implements Runnable
     private PircBotX bot;
     private Configuration conf;
     private boolean debug;
-    private boolean verbose;
-    
 
-    public Bot(IRMC plugin, Configuration conf)
+    public Bot(IRMC plugin)
     {
         this.plugin = plugin;
-        this.conf = conf;
+        conf = new Configuration(plugin, this);
         conf.loadConfig();
-        thread = new Thread(this);
-        thread.start();
+        debug = conf.isDebug();
+        this.thread = new Thread(this, "IRMC");
+        this.thread.start();
     }
 
     @Override
     public synchronized void run()
     {
-        
         if (debug) {
             plugin.getLogger().info(String.format("Initialising IRMC..."));
-        }       
+        }
+        bot = new PircBotX();
         if (debug) {
             plugin.getLogger().info(String.format("Loading configuration..."));
         }
+        loadConfig();
+        if (debug) {
+            plugin.getLogger().info(String.format("Adding bot listeners..."));
+        }
+        addListeners();
         if (debug) {
             plugin.getLogger().info(String.format("Connecting to server..."));
         }
-        
-        try {
-            this.start();
-        } catch (final Exception e) {
-        }
-    }
-
-    void start()
-    {
-        bot = new PircBotX();
-        loadConfig();
-        addListeners();
-        //connect();
-    }
-    
-    private void loadConfig()
-    {
-        this.debug = true;
-        this.verbose = true;
-        bot.setVerbose(debug && verbose);
-        bot.setAutoNickChange(conf.isAutoNick());
-        plugin.getLogger().warning(String.format("Configuration not fully implemented!"));
-    }
-
-    /*
-    private void connect()
-    {
-        try {
-            if (conf.isSsl() && conf.isVerifySsl()) {
-                bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass(), new UtilSSLSocketFactory());
-            } else if (conf.isSsl() && !conf.isVerifySsl()) {
-                bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass(), new UtilSSLSocketFactory().trustAllCertificates());
-            } else {
-                if(conf.getServerPass().isEmpty())
-                {
-                    bot.connect(conf.getServer(), conf.getPort());
-                }
-                else
-                {
-                    bot.connect(conf.getServer(), conf.getPort(), conf.getServerPass());
-                }
-            }
-        } catch (final IOException e) {
-        } catch (final IrcException e) {
-        }
-    }
-    */
-
-    public void joinChannels()
-    {
-        if (debug) {
-            plugin.getLogger().info(String.format("Joining channels..."));
-        }
-        for (String str : conf.getChannels()) {
-            if (str.contains(" ")) {
-                if (debug) {
-                    plugin.getLogger().info(String.format("Joining %s...", str.split(" ")[0]));
-                }
-                bot.joinChannel(str.split(" ")[0], str.split(" ")[1]);
-            } else {
-                if (debug) {
-                    plugin.getLogger().info(String.format("Joining %s...", str));
-                }
-                bot.joinChannel(str);
-            }
-        }
+        connect();
     }
 
     private void addListeners()
     {
         bot.getListenerManager().addListener(this);
+        bot.getListenerManager().addListener(new UserListener());
+        bot.getListenerManager().addListener(new ServerListener());
+    }
+
+    private void loadConfig()
+    {
+    }
+
+    private void connect()
+    {
+    }
+
+    private void joinChannels()
+    {
     }
 
     @Override
@@ -119,24 +74,24 @@ public class Bot extends ListenerAdapter implements Runnable
 
     public synchronized void kill()
     {
+        if (debug) {
+            plugin.getLogger().info(String.format("Killing IRMC..."));
+        }
         if (bot.isConnected()) {
             for (Channel channel : bot.getChannels()) {
                 bot.partChannel(channel);
+                //bot.partChannel(channel, "Killing IRMC...");
             }
             bot.disconnect();
         }
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    
-    public void sendChannels(String msg) //TODO: this doesn't work
-    {
-        for(Channel chan : bot.getChannels())
-        {
-            chan.sendMessage(msg);
+        if (thread.isAlive()) {
+            try {
+                thread.join();
+            } catch (Exception e) {
+                if (debug) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 }

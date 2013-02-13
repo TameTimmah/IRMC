@@ -12,9 +12,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 public class Configuration
 {
 
+    private Map<String, String> paths = new HashMap<String, String>();
     private final IRMC plugin;
     private final FileConfiguration config;
-    private Map<String, String> paths = new HashMap<String, String>();
     /* General Config Options */
     @Getter
     @Setter
