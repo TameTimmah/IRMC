@@ -71,12 +71,7 @@ public class Configuration
     {
         this.plugin = plugin;
         this.config = plugin.getConfig();
-        loadPaths();
-    }
-
-    private void loadPaths()
-    {
-        /* paths.put("/irmc cfg SUBCOMMAND", "path.to.irc.option") */
+        /* Potentially being moved. Do whatever you want with it. I'm just documenting it. */
         paths.put("debug", "debug");
         paths.put("verbose", "irc.verbose");
         paths.put("autonick", "irc.autonick");
