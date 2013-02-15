@@ -146,6 +146,7 @@ public class Bot extends ListenerAdapter implements Runnable
     public synchronized void relayServerMessage(String message)
     {
         for (Channel channel : bot.getChannels()) {
+            bot.sendMessage(channel, String.format("{%s}", message));
         }
     }
 }

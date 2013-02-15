@@ -1,6 +1,7 @@
 package com.notoriousdev.irmc;
 
 import com.notoriousdev.irmc.events.bukkit.PlayerListener;
+import com.notoriousdev.irmc.events.bukkit.ServerListener;
 import java.io.File;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -32,7 +33,7 @@ public class IRMC extends JavaPlugin
         conf = new Configuration(this);
         bot = new Bot(this, conf);
         getServer().getPluginManager().registerEvents(new PlayerListener(this, bot), this);
-        //getServer().getPluginManager().registerEvents(new ServerListener(this), this);
+        getServer().getPluginManager().registerEvents(new ServerListener(this, bot), this);
     }
     
     public void relayToServer(String message)
