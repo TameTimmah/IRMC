@@ -11,13 +11,13 @@ import org.pircbotx.hooks.events.ConnectEvent;
 
 public class Bot extends ListenerAdapter implements Runnable
 {
-
+    
     private final IRMC plugin;
     private final Thread thread;
     private PircBotX bot;
     private Configuration conf;
     private boolean debug;
-
+    
     public Bot(IRMC plugin, Configuration conf)
     {
         this.plugin = plugin;
@@ -25,7 +25,7 @@ public class Bot extends ListenerAdapter implements Runnable
         thread = new Thread(this);
         thread.start();
     }
-
+    
     @Override
     public synchronized void run()
     {
@@ -37,7 +37,7 @@ public class Bot extends ListenerAdapter implements Runnable
             e.printStackTrace();
         }
     }
-
+    
     void start()
     {
         if (debug) {
@@ -57,14 +57,14 @@ public class Bot extends ListenerAdapter implements Runnable
         }
         connect();
     }
-
+    
     private void addListeners()
     {
         bot.getListenerManager().addListener(this);
         bot.getListenerManager().addListener(new UserListener(plugin, this));
         bot.getListenerManager().addListener(new ServerListener(plugin, this));
     }
-
+    
     private void loadOptions()
     {
         bot.setVerbose(conf.isVerbose());
@@ -77,7 +77,7 @@ public class Bot extends ListenerAdapter implements Runnable
         bot.setLogin(conf.getIdent());
         bot.setVersion(String.format("IRMC Version %s - A PircBotX Minecraft-IRC Bridge.", plugin.getDescription().getVersion()));
     }
-
+    
     private void connect()
     {
         String host = conf.getAddress();
@@ -99,20 +99,21 @@ public class Bot extends ListenerAdapter implements Runnable
             }
         }
     }
-
+    
     private void joinChannels()
     {
         for (String channel : conf.getChannels()) {
             bot.joinChannel(channel);
         }
     }
-
+    
     @Override
     public void onConnect(ConnectEvent event)
     {
         joinChannels();
+        //bot.identify(conf.getPassword());
     }
-
+    
     public synchronized void kill()
     {
         if (debug) {
@@ -135,14 +136,14 @@ public class Bot extends ListenerAdapter implements Runnable
             }
         }
     }
-
+    
     public synchronized void chatToIrc(Player player, String message)
     {
         for (Channel channel : bot.getChannels()) {
             bot.sendMessage(channel, String.format("{%s} %s", player.getName(), message));
         }
     }
-
+    
     public synchronized void relayServerMessage(String message)
     {
         for (Channel channel : bot.getChannels()) {
