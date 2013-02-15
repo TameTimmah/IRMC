@@ -22,20 +22,41 @@ public class ServerListener implements Listener
     }
 
     @EventHandler
-    public void playerJoin(PlayerJoinEvent event)
+    public void playerJoin(final PlayerJoinEvent event)
     {
-        bot.relayServerMessage(String.format("{%s has joined the server!}", event.getPlayer().getName()));
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                bot.relayServerMessage(String.format("%s has joined the server!", event.getPlayer().getName()));
+            }
+        });
     }
 
     @EventHandler
-    public void playerQuit(PlayerQuitEvent event)
+    public void playerQuit(final PlayerQuitEvent event)
     {
-        bot.relayServerMessage(String.format("{%s has left the server!}", event.getPlayer().getName()));
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                bot.relayServerMessage(String.format("%s has left the server!", event.getPlayer().getName()));
+            }
+        });
     }
 
     @EventHandler
-    public void playerKicked(PlayerKickEvent event)
+    public void playerKicked(final PlayerKickEvent event)
     {
-        bot.relayServerMessage(String.format("{%s has been kicked for reason: %s}", event.getPlayer().getName(), event.getReason()));
+        plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                bot.relayServerMessage(String.format("%s has been kicked for reason: %s", event.getPlayer().getName(), event.getReason()));
+            }
+        });
     }
 }
