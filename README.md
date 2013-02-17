@@ -16,3 +16,4 @@ Changelog
 * Added option to toggle nickserv usage - TheReverend403
 * Plenty of success today. Let's keep it up - BranicYeti
 * General fixing and cleanup. Soon, we can get a release out I should think - BranicYeti
+
