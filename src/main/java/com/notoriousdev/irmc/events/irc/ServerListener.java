@@ -25,7 +25,7 @@ public class ServerListener extends ListenerAdapter
         String relay = String.format("[IRMC] %s has joined %s", event.getUser().getNick(), event.getChannel().getName());
         plugin.relayToServer(relay);
     }
-    
+
     @Override
     public void onPart(PartEvent event)
     {

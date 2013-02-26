@@ -3,7 +3,7 @@ name: IRMC
 # This is obvious... Probably don't touch it...
 main: com.notoriousdev.irmc.IRMC
 # Make sure this is updated when we update the plugin along with version in pom.xml
-version: 0.0.1-SNAPSHOT
+version: 0.1.0
 # The website for NotoriousDev. Not likely to change any time soon.
 website: http://www.notoriousdev.com
 # Blah blah blah...

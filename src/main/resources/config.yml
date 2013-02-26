@@ -49,5 +49,5 @@ irc:
     use-ssl: false
     verify-ssl: false
   channels:
-  - #channel
-  - #channel
+  - '#channel'
+  - '#channel'

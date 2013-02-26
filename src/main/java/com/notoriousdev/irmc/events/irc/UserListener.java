@@ -3,7 +3,6 @@ package com.notoriousdev.irmc.events.irc;
 import com.notoriousdev.irmc.Bot;
 import com.notoriousdev.irmc.IRMC;
 import org.pircbotx.hooks.ListenerAdapter;
-import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.MessageEvent;
 
 /* User Listener - Chat, Action, Interacting with Bot */
