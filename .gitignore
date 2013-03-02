@@ -1,2 +1,5 @@
 /target/
 /.idea/
+*.jar
+/output/
+dependency-reduced-pom.xml

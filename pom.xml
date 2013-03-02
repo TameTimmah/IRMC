@@ -65,50 +65,30 @@
 
     <!--Don't edit this-->
     <build>
-        <directory>target</directory>
-        <outputDirectory>target/classes</outputDirectory>
-        <finalName>${project.artifactId}</finalName>
-        <sourceDirectory>${basedir}/src/main/java/</sourceDirectory>
-        <defaultGoal>clean install</defaultGoal>
-        <resources>
-            <resource>
-                <targetPath>.</targetPath>
-                <filtering>true</filtering>
-                <directory>${basedir}/src/main/resources/</directory>
-                <includes>
-                    <include>plugin.yml</include>
-                    <include>config.yml</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
                 <groupId>org.apache.maven.plugins</groupId>
-                <version>2.5.1</version>
-                <configuration>
-                    <!--Java Version-->
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <artifactSet>
+                                <excludes>
+                                    <exclude>org.bukkit:bukkit</exclude>
+                                </excludes>
+                            </artifactSet>
+                            <minimizeJar>true</minimizeJar>
+                            <finalName>IRMC</finalName>
+                            <shadedArtifactAttached>false</shadedArtifactAttached>
+                            <outputDirectory>${basedir}/output</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <finalName>IRMC</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
-                </configuration>
             </plugin>
         </plugins>
     </build>
