@@ -85,7 +85,6 @@
                             <minimizeJar>true</minimizeJar>
                             <finalName>IRMC</finalName>
                             <shadedArtifactAttached>false</shadedArtifactAttached>
-                            <outputDirectory>${basedir}/output</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
