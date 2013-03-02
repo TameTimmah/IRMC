@@ -18,3 +18,4 @@ Changelog
 * General fixing and cleanup. Soon, we can get a release out I should think - BranicYeti
 * Cleanup and some other stuff. Ready for release - BranicYeti
 * Testing Jenkins again - BranicYeti
+* Testing TC
